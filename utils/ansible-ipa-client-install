@@ -147,6 +147,9 @@ def parse_options():
                         type=int, default=None,
                         help="number of attempts to obtain host TGT (defaults "
                         "to 5)")
+    parset.add_argument("--no-sethostname",
+                        action="store_true",
+                        help="do not attempt to update the hostname")
     # sssd
     parser.add_argument("--fixed-primary", dest="fixed_primary",
                         action="store_true",
@@ -337,6 +340,8 @@ def main(options, args):
             f.write("ipaclient_no_dns_sshfp=yes\n")
         if options.kinit_attempts:
             f.write("ipaclient_kinit_attempts=%d\n" % options.kinit_attempts)
+        if options.no_sethostname:
+            f.write("ipaclient_no_sethostname=yes\n")
         # sssd
         if options.fixed_primary:
             f.write("ipasssd_fixed_primary=yes\n")

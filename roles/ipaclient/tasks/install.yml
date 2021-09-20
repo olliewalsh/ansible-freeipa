@@ -188,7 +188,7 @@
   - name: Install - Backup and set hostname
     ipaclient_set_hostname:
       hostname: "{{ result_ipaclient_test.hostname }}"
-    when: not ipaclient_on_master | bool
+    when: not ipaclient_on_master | bool and not ipaclient_no_sethostname
 
   - name: Install - Join IPA
     ipaclient_join:
